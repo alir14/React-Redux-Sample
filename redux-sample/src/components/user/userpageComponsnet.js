@@ -1,53 +1,55 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as userActions from "../redux/actions/userActions";
-import UserListComponent from "./user/userlistcomponents";
-import ManageUserComponent from "./user/manageusercomponent";
-import Spinner from "./common/Spinner";
-import ManageMenu from "./common/ManageMenu";
+// import { bindActionCreators } from "redux";
+import * as userActions from "../../redux/actions/userActions";
+import UserListComponent from "./userlistcomponents";
+import ManageUserComponent from "./manageusercomponent";
+import Spinner from "../common/Spinner";
+import ManageMenu from "../common/ManageMenu";
 
 class UserPageComponent extends Component {
   componentDidMount() {
     const { usersData } = this.props;
 
     if (usersData && usersData.users.length === 0) {
-      this.props.actions.loadUsers();
+      //this.props.actions.loadUsers();
+      this.props.loadAllUsers();
     }
   }
 
   handleLoad = () => {
-    this.props.actions.loadUsers();
+    //this.props.actions.loadUsers();
+    this.props.loadAllUsers();
   };
 
   handleAdd = (event) => {
     event.preventDefault();
     const user = { id: "123456", name: "XxX" };
-    this.props.actions.addNewUser(user);
+    // this.props.actions.addNewUser(user);
   };
 
   handleUpdate = (event) => {
     event.preventDefault();
     console.log("update", this.props.selectedUser);
-    this.props.actions.updateUser(this.props.selectedUser);
+    // this.props.actions.updateUser(this.props.selectedUser);
   };
 
   handleDelete = (id) => {
     console.log(id);
     let _user = this.props.usersData.users.filter((user) => user.id === id);
-    this.props.actions.DeleteUserAction(_user[0]);
-    this.props.actions.editUser({ id: "", name: "" });
+    // this.props.actions.DeleteUserAction(_user[0]);
+    this.props.selectUser("");
   };
 
   handleSelect = (id) => {
     let _user = this.props.usersData.users.filter((user) => user.id === id);
-    this.props.actions.editUser(_user[0]);
+    this.props.selectUser(_user[0].id);
   };
 
   handleChangeUser = (event) => {
     let filed = event.target.name;
     let value = event.target.value;
-    this.props.actions.editUser({ ...this.props.selectedUser, [filed]: value });
+    // this.props.selectUser({ ...this.props.selectedUser, [filed]: value });
   };
 
   render() {
@@ -95,7 +97,11 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(userActions, dispatch),
+  loadAllUsers: () => dispatch(userActions.fetchAllUserAction()),
+  selectUser: (id) => {
+    dispatch(userActions.selectedUserAction(id));
+  },
+  //actions: bindActionCreators(userActions, dispatch),
   // loadAllUsers: () => dispatch(userActions.loadUsers),
   // createUser: (user) => dispatch(userActions.addNewUser(user)),
 });
