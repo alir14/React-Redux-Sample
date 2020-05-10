@@ -46,7 +46,7 @@ const ManageUserComponent = ({
         name="id"
         title="id"
         value={selecteduser.id}
-        onValueChange={onUserChange}
+        onValueChange={(event) => onUserChange(event)}
         error={errors.name}
       />
       <TextInput
@@ -54,7 +54,7 @@ const ManageUserComponent = ({
         name="name"
         title="name"
         value={selecteduser.name}
-        onValueChange={onUserChange}
+        onValueChange={(event) => onUserChange(event)}
         error={errors.name}
       />
       {_visible ? (

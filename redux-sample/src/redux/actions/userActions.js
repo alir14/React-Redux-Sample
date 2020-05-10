@@ -29,3 +29,8 @@ export const selectedUserAction = makeActionCreator(
   actionType.Request_Set_Selected_User,
   `id`
 );
+
+export const modifyUserAction = makeActionCreator(
+  actionType.Request_Modify,
+  `user`
+);

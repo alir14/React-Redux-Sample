@@ -8,16 +8,16 @@ export const GetUsers = async (url) => {
   return data;
 };
 
-export function ManageUser(url, apiType, value) {
-  console.log("saveUser");
-
+export const ManageUser = async (url, apiType, value) => {
   const fetchOption = {
     method: apiType,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(value),
   };
-  let result;
-  fetch(url, fetchOption).then((response) => (result = response.json()));
 
-  return result;
-}
+  const data = await await fetch(url, fetchOption).then((response) => {
+    return response.json();
+  });
+
+  return data;
+};
