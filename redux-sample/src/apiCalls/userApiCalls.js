@@ -1,21 +1,23 @@
-import axios from "axios";
+export const GetUsers = async (url) => {
+  console.log("calling users");
+  const response = await fetch(url);
+  const data = await response.json();
+  if (response.status >= 400) {
+    throw new Error(data.errors);
+  }
+  return data;
+};
 
-const axiosInstance = axios.create({
-  baseURL: "https://localhost:5001",
-  timeout: 1000,
-  headers: { "Content-Type": "text/plain" },
-});
+export const ManageUser = async (url, apiType, value) => {
+  const fetchOption = {
+    method: apiType,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(value),
+  };
 
-export function GetUsers() {
-  return axios.get("https://jsonplaceholder.typicode.com/users");
-}
+  const data = await await fetch(url, fetchOption).then((response) => {
+    return response.json();
+  });
 
-export function AddUser(user) {
-  console.log("saveUser");
-
-  return axiosInstance.post("/weatherforecast", user);
-}
-
-export function saveUser(user) {
-  return axiosInstance.post("/weatherforecast", user);
-}
+  return data;
+};

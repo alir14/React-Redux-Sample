@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import userComponent from "./components/userpageComponsnet";
+import userComponent from "./components/userContainer";
 import tweetComponent from "./components/tweetComponent";
 import PageNotFound from "./components/PageNotFound.js";
 function App() {

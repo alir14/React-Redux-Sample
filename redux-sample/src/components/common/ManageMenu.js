@@ -9,7 +9,7 @@ const ManageMenu = ({ Load, Add, Update, Delete }) => {
           type="button"
           className="btn btn-primary"
           value="Load"
-          onClick={Load.event}
+          onClick={() => Load.event()}
         />
       ) : (
         <></>
@@ -20,7 +20,7 @@ const ManageMenu = ({ Load, Add, Update, Delete }) => {
           type="button"
           className="btn btn-success"
           value="Add"
-          onClick={Add.event}
+          onClick={(event) => Add.event(event)}
         />
       ) : (
         <></>
@@ -31,7 +31,7 @@ const ManageMenu = ({ Load, Add, Update, Delete }) => {
           type="button"
           className="btn btn-warning"
           value="Update"
-          onClick={Update.event}
+          onClick={(event) => Update.event(event)}
         />
       ) : (
         <></>
@@ -42,7 +42,7 @@ const ManageMenu = ({ Load, Add, Update, Delete }) => {
           type="button"
           className="btn btn-danger"
           value="Delete"
-          onClick={Delete.event}
+          onClick={(event) => Delete.event(event)}
         />
       ) : (
         <></>
